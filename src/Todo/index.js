@@ -1,4 +1,5 @@
 import { Component } from "react";
+import style from "./index.module.scss";
 
 export default class Todo extends Component {
   constructor() {
@@ -30,8 +31,8 @@ export default class Todo extends Component {
 
   render() {
     return (
-      <div>
-        <h1>할 일</h1>
+      <div className={style.todo}>
+        <h1>리스트 1</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
