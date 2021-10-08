@@ -1,11 +1,12 @@
 import style from "./index.module.scss";
 
 export default function List(props) {
-  return (
-    <ul className={style.list}>
-      {props.jobs.map((job, idx) => (
-        <li key={idx}>{job.title}</li>
-      ))}
-    </ul>
-  );
+  const listItems = props.jobs.map((job, idx) => (
+    <ListItem key={idx} job={job} />
+  ));
+  return <ul className={style.list}>{listItems}</ul>;
+}
+
+function ListItem(props) {
+  return <li>{props.job.title}</li>;
 }
