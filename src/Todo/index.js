@@ -8,9 +8,9 @@ export default class Todo extends Component {
     this.state = {
       title: "",
       jobs: [
-        { title: "Node.js 공부하기" },
-        { title: "Express 공부하기" },
-        { title: "React 공부하기" },
+        { title: "Node.js 공부하기", done: true },
+        { title: "Express 공부하기", done: false },
+        { title: "React 공부하기", done: false },
       ],
     };
 

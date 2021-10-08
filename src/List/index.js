@@ -1,12 +1,17 @@
 import style from "./index.module.scss";
 
 export default function List(props) {
-  const listItems = props.jobs.map((job, idx) => (
-    <ListItem key={idx} job={job} />
-  ));
+  const notDoneFirst = (a, b) => (a.done ? !b.done : -1);
+  const jobs = [...props.jobs].sort(notDoneFirst);
+  const listItems = jobs.map((job, idx) => <ListItem key={idx} job={job} />);
   return <ul className={style.list}>{listItems}</ul>;
 }
 
 function ListItem(props) {
-  return <li>{props.job.title}</li>;
+  return (
+    <li>
+      <input type="checkbox" checked={props.job.done} />
+      {props.job.title}
+    </li>
+  );
 }
