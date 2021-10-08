@@ -1,5 +1,6 @@
 import { Component } from "react";
 import style from "./index.module.scss";
+import List from "../List";
 
 export default class Todo extends Component {
   constructor() {
@@ -44,11 +45,7 @@ export default class Todo extends Component {
           />
           <input type="submit" value="추가" onChange={this.handleTitleChange} />
         </form>
-        <ul>
-          {this.state.jobs.map((job, idx) => (
-            <li key={idx}>{job.title}</li>
-          ))}
-        </ul>
+        <List jobs={this.state.jobs} />
       </div>
     );
   }
