@@ -27,7 +27,7 @@ export default class Todo extends Component {
 
   handleSubmit(event) {
     const id = this.state.jobs[this.state.jobs.length - 1].id + 1;
-    const job = { id, title: this.state.title };
+    const job = { id, title: this.state.title, done: false };
     this.setState({ jobs: [...this.state.jobs, job] });
     this.setState({ title: "" });
     event.preventDefault();
@@ -37,7 +37,7 @@ export default class Todo extends Component {
     const id = event.target.id;
     const jobs = [...this.state.jobs];
     jobs.forEach((job) => {
-      if (job.id === +id) job.done = !job.done;
+      if (job.id === +id) job.done = event.target.checked;
     });
     this.setState({ jobs: jobs });
   }
