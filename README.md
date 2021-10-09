@@ -14,6 +14,10 @@ https://gint0nic-todo.herokuapp.com
 
 <img src="screenshot.png" width="500">
 
+## What I Learned
+
+[Wiki](https://github.com/gintooooonic/react-todo/wiki)
+
 ## 참고자료
 
 - [React 한글 공식 문서](https://ko.reactjs.org/docs/getting-started.html)
