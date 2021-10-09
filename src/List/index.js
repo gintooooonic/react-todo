@@ -3,15 +3,22 @@ import style from "./index.module.scss";
 export default function List(props) {
   const notDoneFirst = (a, b) => (a.done ? !b.done : -b.done);
   const jobs = [...props.jobs].sort(notDoneFirst);
-  const listItems = jobs.map((job, idx) => <ListItem key={idx} job={job} />);
+  const listItems = jobs.map((job) => (
+    <ListItem key={job.id} job={job} handleCheck={props.handleCheck} />
+  ));
   return <ul className={style.list}>{listItems}</ul>;
 }
 
 function ListItem(props) {
   return (
-    <li>
-      <input type="checkbox" checked={props.job.done} />
-      {props.job.title}
+    <li data-done={props.job.done}>
+      <input
+        type="checkbox"
+        id={props.job.id}
+        checked={props.job.done}
+        onChange={props.handleCheck}
+      />
+      <label htmlFor={props.job.id}>{props.job.title}</label>
     </li>
   );
 }

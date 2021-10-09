@@ -8,14 +8,15 @@ export default class Todo extends Component {
     this.state = {
       title: "",
       jobs: [
-        { title: "Node.js 공부하기", done: true },
-        { title: "Express 공부하기", done: false },
-        { title: "React 공부하기", done: false },
+        { id: 1, title: "Node.js 공부하기", done: true },
+        { id: 2, title: "Express 공부하기", done: false },
+        { id: 3, title: "React 공부하기", done: false },
       ],
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
   }
 
   handleChange(event) {
@@ -28,6 +29,15 @@ export default class Todo extends Component {
     this.setState({ jobs: [...this.state.jobs, job] });
     this.setState({ title: "", due: "" });
     event.preventDefault();
+  }
+
+  handleCheck(event) {
+    const id = event.target.id;
+    const jobs = [...this.state.jobs];
+    jobs.forEach((job) => {
+      if (job.id === +id) job.done = !job.done;
+    });
+    this.setState({ jobs: jobs });
   }
 
   render() {
@@ -45,7 +55,7 @@ export default class Todo extends Component {
           />
           <input type="submit" value="추가" onChange={this.handleTitleChange} />
         </form>
-        <List jobs={this.state.jobs} />
+        <List jobs={this.state.jobs} handleCheck={this.handleCheck} />
       </div>
     );
   }
