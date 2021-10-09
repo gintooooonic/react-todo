@@ -4,7 +4,12 @@ export default function List(props) {
   const notDoneFirst = (a, b) => (a.done ? !b.done : -b.done);
   const jobs = [...props.jobs].sort(notDoneFirst);
   const listItems = jobs.map((job) => (
-    <ListItem key={job.id} job={job} handleCheck={props.handleCheck} />
+    <ListItem
+      key={job.id}
+      job={job}
+      handleCheck={props.handleCheck}
+      handleDelete={props.handleDelete}
+    />
   ));
   return <ul className={style.list}>{listItems}</ul>;
 }
@@ -19,6 +24,9 @@ function ListItem(props) {
         onChange={props.handleCheck}
       />
       <label htmlFor={props.job.id}>{props.job.title}</label>
+      <button type="button" data-id={props.job.id} onClick={props.handleDelete}>
+        ✖
+      </button>
     </li>
   );
 }

@@ -6,6 +6,11 @@
 
   & > li {
     margin: 10px 0;
+    & > button {
+      border: 0;
+      background-color: #ffffff;
+      color: red;
+    }
   }
 
   & > li[data-done="true"] {
