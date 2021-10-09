@@ -45,7 +45,6 @@ export default class Todo extends Component {
   handleDelete(event) {
     const id = event.target.dataset.id;
     const jobs = this.state.jobs.filter((job) => job.id !== +id);
-    console.log(jobs);
     this.setState({ jobs: jobs });
   }
 
