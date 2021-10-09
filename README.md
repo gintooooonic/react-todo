@@ -6,6 +6,10 @@
 - 할 일 추가하기
 - 할 일 삭제하기
 
+## 데모
+
+https://gint0nic-todo.herokuapp.com
+
 ## 스크린샷
 
 <img src="screenshot.png" width="500">
