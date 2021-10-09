@@ -26,9 +26,10 @@ export default class Todo extends Component {
   }
 
   handleSubmit(event) {
-    const id = this.state.jobs[this.state.jobs.length - 1].id + 1;
+    const jobs = [...this.state.jobs];
+    const id = jobs.length ? jobs[jobs.length - 1].id + 1 : 1;
     const job = { id, title: this.state.title, done: false };
-    this.setState({ jobs: [...this.state.jobs, job] });
+    this.setState({ jobs: [...jobs, job] });
     this.setState({ title: "" });
     event.preventDefault();
   }
