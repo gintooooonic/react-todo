@@ -1,5 +1,6 @@
 import { Component } from "react";
 import style from "./index.module.scss";
+import Header from "../Header";
 import List from "../List";
 
 export default class Todo extends Component {
@@ -52,7 +53,7 @@ export default class Todo extends Component {
   render() {
     return (
       <div className={style.todo}>
-        <h1>리스트 1</h1>
+        <Header title="TODO.app" />
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
