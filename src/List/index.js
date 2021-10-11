@@ -2,11 +2,11 @@ import style from "./index.module.scss";
 
 export default function List(props) {
   const notDoneFirst = (a, b) => (a.done ? !b.done : -b.done);
-  const jobs = [...props.jobs].sort(notDoneFirst);
-  const listItems = jobs.map((job) => (
+  const todos = [...props.todos].sort(notDoneFirst);
+  const listItems = todos.map((todo) => (
     <ListItem
-      key={job.id}
-      job={job}
+      key={todo.id}
+      todo={todo}
       handleCheck={props.handleCheck}
       handleDelete={props.handleDelete}
     />
@@ -16,15 +16,19 @@ export default function List(props) {
 
 function ListItem(props) {
   return (
-    <li data-done={props.job.done}>
+    <li data-done={props.todo.done}>
       <input
         type="checkbox"
-        id={props.job.id}
-        checked={props.job.done}
+        id={props.todo.id}
+        checked={props.todo.done}
         onChange={props.handleCheck}
       />
-      <label htmlFor={props.job.id}>{props.job.title}</label>
-      <button type="button" data-id={props.job.id} onClick={props.handleDelete}>
+      <label htmlFor={props.todo.id}>{props.todo.title}</label>
+      <button
+        type="button"
+        data-id={props.todo.id}
+        onClick={props.handleDelete}
+      >
         ✖
       </button>
     </li>

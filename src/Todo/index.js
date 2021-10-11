@@ -1,76 +1,61 @@
-import { Component } from "react";
+import { useState } from "react";
 import style from "./index.module.scss";
 import Header from "../Header";
 import List from "../List";
 
-export default class Todo extends Component {
-  constructor() {
-    super();
-    this.state = {
-      title: "",
-      jobs: [
-        { id: 1, title: "Node.js 공부하기", done: true },
-        { id: 2, title: "Express 공부하기", done: false },
-        { id: 3, title: "React 공부하기", done: false },
-      ],
-    };
+export default function Todo() {
+  const [titleForm, setTitleForm] = useState("");
+  const [todos, setTodos] = useState([
+    { id: 1, title: "React 공부하기", done: false },
+  ]);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-  }
-
-  handleChange(event) {
+  const handleTitleChange = (event) => {
     const { target } = event;
-    this.setState({ [target.name]: target.value });
-  }
+    setTitleForm(target.value);
+  };
 
-  handleSubmit(event) {
-    const jobs = [...this.state.jobs];
-    const id = jobs.length ? jobs[jobs.length - 1].id + 1 : 1;
-    const job = { id, title: this.state.title, done: false };
-    this.setState({ jobs: [...jobs, job] });
-    this.setState({ title: "" });
+  const handleSubmit = (event) => {
+    const newId = todos.length ? todos[todos.length - 1].id + 1 : 1;
+    const newTodo = { id: newId, title: titleForm, done: false };
+    setTodos([...todos, newTodo]);
+    setTitleForm("");
     event.preventDefault();
-  }
+  };
 
-  handleCheck(event) {
+  const handleCheck = (event) => {
     const id = event.target.id;
-    const jobs = [...this.state.jobs];
-    jobs.forEach((job) => {
-      if (job.id === +id) job.done = event.target.checked;
+    const newTodos = todos.map((todo) => {
+      if (todo.id === +id) return { ...todo, done: event.target.checked };
+      return todo;
     });
-    this.setState({ jobs: jobs });
-  }
+    setTodos(newTodos);
+  };
 
-  handleDelete(event) {
+  const handleDelete = (event) => {
     const id = event.target.dataset.id;
-    const jobs = this.state.jobs.filter((job) => job.id !== +id);
-    this.setState({ jobs: jobs });
-  }
+    const newTodos = todos.filter((job) => job.id !== +id);
+    setTodos(newTodos);
+  };
 
-  render() {
-    return (
-      <div className={style.todo}>
-        <Header title="TODO.app" />
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="title"
-            value={this.state.title}
-            placeholder="할 일"
-            onChange={this.handleChange}
-            required
-          />
-          <input type="submit" value="추가" onChange={this.handleTitleChange} />
-        </form>
-        <List
-          jobs={this.state.jobs}
-          handleCheck={this.handleCheck}
-          handleDelete={this.handleDelete}
+  return (
+    <div className={style.todo}>
+      <Header title="TODO.app" />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="title"
+          value={titleForm}
+          placeholder="할 일"
+          onChange={handleTitleChange}
+          required
         />
-      </div>
-    );
-  }
+        <input type="submit" value="추가" />
+      </form>
+      <List
+        todos={todos}
+        handleCheck={handleCheck}
+        handleDelete={handleDelete}
+      />
+    </div>
+  );
 }
